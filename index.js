@@ -18,4 +18,4 @@
 
 const Manager = require("./lib/Manager");
 
-new Manager().
+new Site().loadSite();
