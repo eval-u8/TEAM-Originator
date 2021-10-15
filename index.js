@@ -16,6 +16,38 @@
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
 
+const inquirer = require('inquirer');
+// const fs = require('fs');
+// const generatePage = require('./src/page-template');
 const Manager = require("./lib/Manager");
 
-new Site().loadSite();
+const questions = [
+    {
+        type: "input",
+        name: "managerName",
+        message: "Please enter manager's name. (Required)",
+        validate: (managerName) => {
+            if (managerName) {
+                return true;
+            } else {
+                console.log("Please enter the manager's name to proceed.");
+                return false;
+            }
+        },
+    },
+    {
+        type: "input",
+        name: "employeeId",
+        message: "Please enter manager's name. (Required)",
+        validate: (employeeId) => {
+            if (employeeId) {
+                return true;
+            } else {
+                console.log("Please enter the manager's name to proceed.");
+                return false;
+            }
+        },
+    },
+];
+
+// new Site().loadSite();
