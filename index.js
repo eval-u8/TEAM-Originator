@@ -17,7 +17,7 @@
 // THEN I exit the application, and the HTML is generated
 
 const inquirer = require('inquirer');
-const generateTeam = require('./src/page-template');
+const generateWebsite = require('./src/page-template');
 const fs = require('fs');
 // const generatePage = require('./src/page-template');
 const Manager = require("./lib/Manager");
@@ -244,13 +244,10 @@ const managerAction = () => {
 
 const createTeam = () => {
     console.log('Done');
-    console.log(teamArr);
 
-    var html = generateTeam(teamArr);
-    writeToFile('../Indexhaha.html', html)
-    console.log(html);
-
-}
+    var html = generateWebsite(teamArr);
+        writeToFile('../Indexhaha.html', html);
+};
 
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, err => {
