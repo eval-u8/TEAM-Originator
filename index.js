@@ -20,9 +20,13 @@ const inquirer = require('inquirer');
 // const fs = require('fs');
 // const generatePage = require('./src/page-template');
 const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+
+var teamArr = [];
 
 const promptManager = () =>{
-    return inquirer.prompt([
+    inquirer.prompt([
     {
         type: "input",
         name: "managerName",
@@ -74,100 +78,176 @@ const promptManager = () =>{
                 return false;
             }
         }
-    },
-    {
-        type: "list",
-        name: "engOrIntern",
-        message: "What would you like to do?",
-        choices: [
-            'Add an engineer.',
-            'Add an intern.',
-            'Finish team.'
-        ]
-        // validate: (officeNumber) => {
-        //     if (officeNumber) {
-        //         return true;
-        //     } else {
-        //         console.log("Please enter office number to proceed.");
-        //         return false;
-        //     }
-    }])
+    }
+    ])
     .then(answers => {
-        if (answers.engOrIntern === 'Add an engineer.') {
-            return inquirer.prompt([
-                {
-                    type: "input",
-                    name: "engName",
-                    message: "Please enter engineer's name. (Required)",
-                    validate: (engineerName) => {
-                        if (engineerName) {
-                            return true;
-                        } else {
-                            console.log("Please enter name to proceed.");
-                            return false;
-                        }
-                    },
-                },
-                {
-                    type: "number",
-                    name: "employeeId",
-                    message: "Please enter employee ID. (Required)",
-                    validate: (employeeId) => {
-                        if (employeeId) {
-                            return true;
-                        } else {
-                            console.log("Please enter employee ID to proceed.");
-                            return false;
-                        }
-                    },
-                },
-                {
-                    type: "input",
-                    name: "emailAddress",
-                    message: "Please enter e-mail address. (Required)",
-                    validate: (emailAddress) => {
-                        if (emailAddress) {
-                            return true;
-                        } else {
-                            console.log(
-                                "Please enter e-mail address to proceed."
-                            );
-                            return false;
-                        }
-                    },
-                },
-                {
-                    type: "input",
-                    name: "github",
-                    message: "Please enter GitHub username. (Required)",
-                    validate: (githubUsername) => {
-                        if (githubUsername) {
-                            return true;
-                        } else {
-                            console.log(
-                                "Please enter GitHub username to proceed."
-                            );
-                            return false;
-                        }
-                    },
-                },
-            ]);
+        console.log(answers);
+        var manager = new Manager(answers.managerName, answers.employeeId, answers.emailAddress, answers.officeNumber);
+        teamArr.push(manager);
+        console.log(teamArr);
 
-        } else if (answers.engOrIntern === 'Add an intern.') {
-
-        } else {
-
-        }
+        managerAction();
     })
+};
+
+const addIntern = () => {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "internName",
+                message: "Please enter intern's name. (Required)",
+                validate: (internsName) => {
+                    if (internsName) {
+                        return true;
+                    } else {
+                        console.log("Please enter name to proceed.");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "number",
+                name: "employeeId",
+                message: "Please enter employee ID. (Required)",
+                validate: (employeeId) => {
+                    if (employeeId) {
+                        return true;
+                    } else {
+                        console.log("Please enter employee ID to proceed.");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "emailAddress",
+                message: "Please enter e-mail address. (Required)",
+                validate: (emailAddress) => {
+                    if (emailAddress) {
+                        return true;
+                    } else {
+                        console.log("Please enter e-mail address to proceed.");
+                        return false;
+                    }
+                },
+            },
+            {
+                type: "input",
+                name: "school",
+                message: "Please enter intern's school. (Required)",
+                validate: (school) => {
+                    if (school) {
+                        return true;
+                    } else {
+                        console.log("Please enter GitHub username to proceed.");
+                        return false;
+                    }
+                },
+            },
+        ])
+        .then((answers) => {
+            var intern = new Intern(answers.internName, answers.employeeId, answers.emailAddress, answers.school);
+            teamArr.push(intern);
+
+            managerAction();
+        });;
+}
+
+const addEngineer = () => {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "engName",
+            message: "Please enter engineer's name. (Required)",
+            validate: (engineerName) => {
+                if (engineerName) {
+                    return true;
+                } else {
+                    console.log("Please enter name to proceed.");
+                    return false;
+                }
+            },
+        },
+        {
+            type: "number",
+            name: "employeeId",
+            message: "Please enter employee ID. (Required)",
+            validate: (employeeId) => {
+                if (employeeId) {
+                    return true;
+                } else {
+                    console.log("Please enter employee ID to proceed.");
+                    return false;
+                }
+            },
+        },
+        {
+            type: "input",
+            name: "emailAddress",
+            message: "Please enter e-mail address. (Required)",
+            validate: (emailAddress) => {
+                if (emailAddress) {
+                    return true;
+                } else {
+                    console.log("Please enter e-mail address to proceed.");
+                    return false;
+                }
+            },
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "Please enter GitHub username. (Required)",
+            validate: (githubUsername) => {
+                if (githubUsername) {
+                    return true;
+                } else {
+                    console.log("Please enter GitHub username to proceed.");
+                    return false;
+                }
+            },
+        },
+    ])
+    .then(answers => {
+        var engineer = new Engineer(
+            answers.engName,
+            answers.employeeId,
+            answers.emailAddress,
+            answers.github);
+        teamArr.push(engineer);
+
+        managerAction();
+    });
 };
 
 const managerAction = () => {
     return inquirer.prompt([
-
-
+        {
+            type: "list",
+            name: "engOrIntern",
+            message: "What would you like to do?",
+            choices: ["Add an engineer.", "Add an intern.", "Finish team."],
+        },
     ])
+    .then(answers => {
+        if (answers.engOrIntern === "Add an engineer.") {
+            addEngineer();
+        } else if (answers.engOrIntern === "Add an intern.") {
+            addIntern();            
+        } else {
+            createTeam();
+        }
+    });
+}
+
+const createTeam = () => {
+    console.log('Done');
+    console.log(teamArr);
 }
 
 
 promptManager();
+
+
 // new Site().loadSite();
