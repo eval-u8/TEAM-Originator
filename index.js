@@ -21,7 +21,8 @@ const inquirer = require('inquirer');
 // const generatePage = require('./src/page-template');
 const Manager = require("./lib/Manager");
 
-const questions = [
+const promptManager = () =>{
+    return inquirer.prompt([
     {
         type: "input",
         name: "managerName",
@@ -30,24 +31,143 @@ const questions = [
             if (managerName) {
                 return true;
             } else {
-                console.log("Please enter the manager's name to proceed.");
+                console.log("Please enter name to proceed.");
+                return false;
+            }
+        },
+    },
+    {
+        type: "number",
+        name: "employeeId",
+        message: "Please enter employee ID. (Required)",
+        validate: (employeeId) => {
+            if (employeeId) {
+                return true;
+            } else {
+                console.log("Please enter employee ID to proceed.");
                 return false;
             }
         },
     },
     {
         type: "input",
-        name: "employeeId",
-        message: "Please enter manager's name. (Required)",
-        validate: (employeeId) => {
-            if (employeeId) {
+        name: "emailAddress",
+        message: "Please enter e-mail address. (Required)",
+        validate: (emailAddress) => {
+            if (emailAddress) {
                 return true;
             } else {
-                console.log("Please enter the manager's name to proceed.");
+                console.log("Please enter e-mail address to proceed.");
                 return false;
             }
         },
     },
-];
+    {
+        type: "number",
+        name: "officeNumber",
+        message: "Please enter office number (Required)",
+        validate: (officeNumber) => {
+            if (officeNumber) {
+                return true;
+            } else {
+                console.log("Please enter office number to proceed.");
+                return false;
+            }
+        }
+    },
+    {
+        type: "list",
+        name: "engOrIntern",
+        message: "What would you like to do?",
+        choices: [
+            'Add an engineer.',
+            'Add an intern.',
+            'Finish team.'
+        ]
+        // validate: (officeNumber) => {
+        //     if (officeNumber) {
+        //         return true;
+        //     } else {
+        //         console.log("Please enter office number to proceed.");
+        //         return false;
+        //     }
+    }])
+    .then(answers => {
+        if (answers.engOrIntern === 'Add an engineer.') {
+            return inquirer.prompt([
+                {
+                    type: "input",
+                    name: "engName",
+                    message: "Please enter engineer's name. (Required)",
+                    validate: (engineerName) => {
+                        if (engineerName) {
+                            return true;
+                        } else {
+                            console.log("Please enter name to proceed.");
+                            return false;
+                        }
+                    },
+                },
+                {
+                    type: "number",
+                    name: "employeeId",
+                    message: "Please enter employee ID. (Required)",
+                    validate: (employeeId) => {
+                        if (employeeId) {
+                            return true;
+                        } else {
+                            console.log("Please enter employee ID to proceed.");
+                            return false;
+                        }
+                    },
+                },
+                {
+                    type: "input",
+                    name: "emailAddress",
+                    message: "Please enter e-mail address. (Required)",
+                    validate: (emailAddress) => {
+                        if (emailAddress) {
+                            return true;
+                        } else {
+                            console.log(
+                                "Please enter e-mail address to proceed."
+                            );
+                            return false;
+                        }
+                    },
+                },
+                {
+                    type: "input",
+                    name: "github",
+                    message: "Please enter GitHub username. (Required)",
+                    validate: (githubUsername) => {
+                        if (githubUsername) {
+                            return true;
+                        } else {
+                            console.log(
+                                "Please enter GitHub username to proceed."
+                            );
+                            return false;
+                        }
+                    },
+                },
+            ]);
 
+        } else if (answers.engOrIntern === 'Add an intern.') {
+
+        } else {
+
+        }
+    })
+};
+
+const managerAction = () => {
+    return inquirer.prompt([
+
+
+    ])
+}
+
+
+promptManager();
 // new Site().loadSite();
