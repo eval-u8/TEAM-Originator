@@ -4,11 +4,12 @@
     <img src="https://img.shields.io/badge/Command%20Line-orange" />
     <img src="https://img.shields.io/badge/Node%20JS-purple" />
     <img src="https://img.shields.io/badge/Bootstrap-brightgreen" />
+    <img src="https://img.shields.io/badge/Jest-ff69b4" />
 </p>
 
 # Team Originator 🤖
 
-Team Originator is a simple command line application that creates a simple HTML file that shows the member of a team that were input in the command line by the user.
+Team Originator is a simple command line application that creates a simple HTML file that shows the members of a team. These are input in the command line by the user.
 
 ## Quirks 🎯
 
