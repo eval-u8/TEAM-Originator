@@ -82,10 +82,8 @@ const promptManager = () =>{
     }
     ])
     .then(answers => {
-        console.log(answers);
         var manager = new Manager(answers.managerName, answers.employeeId, answers.emailAddress, answers.officeNumber);
         teamArr.push(manager);
-        console.log(teamArr);
 
         managerAction();
     })
