@@ -3,7 +3,7 @@
     <img src="https://img.shields.io/badge/Inquirer-blue"  />
     <img src="https://img.shields.io/badge/Command%20Line-orange" />
     <img src="https://img.shields.io/badge/Node%20JS-purple" />
-    <img src="https://img.shields.io/badge/Bootstrap-yellow" />
+    <img src="https://img.shields.io/badge/Bootstrap-brightgreen" />
 </p>
 
 # Team Originator 🤖
