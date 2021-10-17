@@ -246,7 +246,7 @@ const createTeam = () => {
     console.log('Done');
 
     var html = generateWebsite(teamArr);
-        writeToFile('../Indexhaha.html', html);
+        writeToFile('./output/index.html', html);
 };
 
 function writeToFile(fileName, data) {
