@@ -1,22 +1,94 @@
-generateManager = (managerArray) => {
+const generateManagerCard = function (manager) {
     return `
     <div class="card employee-card">
     <div class="card-header">
-        <h2 class="card-title">${managerArray[0].getName()}</h2>
-        <h3 class="card-title">${managerArray[0].getRole()}</h3>
+        <h2 class="card-title">${manager.name}</h2>
+        <h3 class="card-title">${manager.role}</h3>
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">ID:${managerArray[0].getId()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${managerArray[0].getEmail()}">${managerArray[0].getEmail()}</a></li>
-            <li class="list-group-item">Office #:${managerArray[0].getOfficeNumber()}</li>
+            <li class="list-group-item">ID:${manager.id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
+            <li class="list-group-item">Office #:${manager.officeNumber}</li>
         </ul>
     </div>
 </div>
     `;
 };
 
-generateWebsite = (teamArr) => {
+const generateEngineerCard = function (engineer) {
+    return `
+    <div class="card employee-card">
+    <div class="card-header">
+        <h2 class="card-title">${engineer.name}</h2>
+        <h3 class="card-title">${engineer.role}</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID:${engineer.id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
+            <li class="list-group-item">GitHub:${engineer.github}</li>
+        </ul>
+    </div>
+</div>
+    `;
+};
+
+const generateInternCard = function (intern) {
+    return `
+    <div class="card employee-card">
+    <div class="card-header">
+        <h2 class="card-title">${intern.name}</h2>
+        <h3 class="card-title">${intern.role}</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID:${intern.id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
+            <li class="list-group-item">School:${intern.school}</li>
+        </ul>
+    </div>
+</div>
+    `;
+};
+
+generateWebsite = (data) => {
+
+    pageArray = [];
+
+    for (let i = 0; i < data.length; i++) {
+        const employee = data[i];
+        const role = employee.getRole(); 
+
+        if (role === 'Manager') {
+            const managerCard = generateManager(employee);
+
+            pageArray.push(managerCard);
+        }
+        if (role === 'Engineer') {
+            const engineerCard = generateEngineer(employee);
+
+            pageArray.push(engineerCard);
+        }
+        if (role === 'Intern') {
+            const internCard = generateIntern(employee);
+
+            pageArray.push(internCard);
+        }
+        
+    };
+
+    const employeeCards = pageArray.join('')
+
+    const generateTeam = generateHtml(employeeCards); 
+    return generateTeam;
+};
+
+
+
+
+
+const generateHtml = function (employeeCards) {
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +112,7 @@ generateWebsite = (teamArr) => {
     <div class="container">
         <div class="row">
             <div class="">
-                ${generateManager(teamArr)}
+                ${employeeCards}
             </div>
         </div>
     </div>
