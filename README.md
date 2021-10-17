@@ -16,7 +16,7 @@ Team Originator is a simple command line application that creates a simple HTML 
 The HTML file created will display the role, name, employee ID and email of the team members. Managers will have their office number shown, engineers will have their GitHub profile shown, and interns will have their school shown.
 
 ## Preview 👀 & Instructions
-[Click here for a quick video on how to use the Originator](https://youtu.be/)
+[Click here for a quick video on how to use the Originator](https://youtu.be/-MrwzRy9LN0)
 
 
 ## License 📓
